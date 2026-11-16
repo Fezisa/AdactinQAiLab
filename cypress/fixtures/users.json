@@ -1,0 +1,14 @@
+{
+  "standardUser": {
+    "username": "FezisaRwayi",
+    "password": "Fez411941"
+  },
+   "IncorrectUser": {
+    "username": "Fez_user",
+    "password": "secret_sauce"
+  },
+   "IncorrectPassword": {
+    "username": "standard_user",
+    "password": "wrong_sauce"
+  }
+}
