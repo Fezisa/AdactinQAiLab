@@ -7,19 +7,27 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import LoginPO from '../e2e/PageObjects/loginPage';
+
+Cypress.Commands.add('login', (username, password) => {
+  cy.session(
+    [username, password],           
+    () => {
+      const loginPO = new LoginPO();
+      cy.visit('https://adactinhotelapp.com/index.php');
+      loginPO.UsernameSelect(username);
+      loginPO.PasswordSelect(password);
+      loginPO.clickLogin();
+      loginPO.verifyLoginSuccess();
+    },
+    {
+    //   cacheAcrossSpecs: true,   
+      validate() {
+        // 
+        cy.visit('https://adactinhotelapp.com/SearchHotel.php');
+        cy.url().should('include', '/SearchHotel.php');
+      },
+    }
+  );
+});

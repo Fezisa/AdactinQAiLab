@@ -27,7 +27,7 @@ describe('Login Page - Positive Tests', () => {
     loginPO.verifyLoginSuccess()
 
 
-     cy.reload();
+    //  cy.reload();
 
   })
 

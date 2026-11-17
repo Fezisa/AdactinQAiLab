@@ -1,11 +1,9 @@
 import SearchPO from '../../../PageObjects/searchPage';
-import LoginPO from '../../../PageObjects/loginPage';
 
 
 describe('Login Page - Negative Tests', () => {
 
   const searchPO = new SearchPO();
-  const loginPO = new LoginPO();
 
     let users;
 
@@ -17,21 +15,11 @@ describe('Login Page - Negative Tests', () => {
 
 
   beforeEach(() => {
-    cy.visit('https://adactinhotelapp.com/index.php')
+    cy.login(users.standardUser.username, users.standardUser.password);
+    cy.visit('https://adactinhotelapp.com/SearchHotel.php');  
+  });
 
-
-  })
-
-  it('Neg TC1 - Blank Location Selected', () => {
-    loginPO.UsernameCheck()
-    loginPO.UsernameSelect(users.standardUser.username)
-
-    loginPO.PasswordCheck()
-    loginPO.PasswordSelect(users.standardUser.password)
-
-    loginPO.clickLogin()
-    loginPO.verifyLoginSuccess()
-
+  it('Neg TC1 - Test Search with blank location selected', () => {
 
     //
     searchPO.LocationListCheck()
